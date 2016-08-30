@@ -53,5 +53,5 @@ return function(quads, seconds, loop)
         end
     end
 
-    return frames
+    return obj
 end
