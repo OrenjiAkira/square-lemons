@@ -30,6 +30,9 @@ function love.update(dt)
     while framedelay >= GLOBALS.frameunit do
         framedelay = framedelay - GLOBALS.frameunit
         framecount = framecount + 1
+
+        -- Game logic here
+        
     end
 end
 
