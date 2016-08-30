@@ -7,25 +7,28 @@ I don't know what I am doing, nor why I am doing it.
 ]]
 
 -- Utility
-lux     = require 'lux.pack' 'lux'
-Vector  = require 'lux.geom.Vector'
-
--- Globals
-globals = nil
 
 local framedelay = 0
 local framecount = 0
 
 function love.load()
     -- Love2D Load. Load stuff here.
-    globals = require 'globals'
+
+    -- Useful low-level stuff
+    LUX     = require 'lux.pack' 'lux'
+    UTILITY = LUX.pack('utility')
+    UTILITY.Vector  = require 'lux.geom.Vector'
+
+    -- Game Globals and Types
+    GLOBALS = require 'globals'
+    CLASSES = LUX.pack('classes')
 end
 
 function love.update(dt)
     -- Love2D Update. Updates game logic.
     framedelay = framedelay + dt
-    while framedelay >= globals.frameunit do
-        framedelay = framedelay - globals.frameunit
+    while framedelay >= GLOBALS.frameunit do
+        framedelay = framedelay - GLOBALS.frameunit
         framecount = framecount + 1
     end
 end
@@ -39,7 +42,7 @@ function love.keyreleased(key)
     -- Debug exit
     if key == 'escape' then
         print("Frame count: ", framecount)
-        print("Pseudo-time count: ", framecount/globals.framerate)
+        print("Pseudo-time count: ", framecount/GLOBALS.framerate)
         love.event.quit()
     end
 end
