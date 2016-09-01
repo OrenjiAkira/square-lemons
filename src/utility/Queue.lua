@@ -9,13 +9,13 @@ return function (size)
     function obj.enqueue(item)
         assert(not queue[tail], "Queue size overflow on Queue #" .. obj)
         queue[tail] = item
-        tail = (tail + 1) % length
+        tail = (tail % length) + 1
     end
 
     function obj.dequeue()
         local item = queue[head]
         queue[head] = false
-        head = (head + 1) % length
+        head = (head % length) + 1
         return item
     end
 
