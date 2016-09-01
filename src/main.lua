@@ -11,6 +11,8 @@ I don't know what I am doing, nor why I am doing it.
 local framedelay = 0
 local framecount = 0
 
+local test_image
+
 function love.load()
     -- Love2D Load. Load stuff here.
 
@@ -22,6 +24,14 @@ function love.load()
     -- Game Globals and Types
     GLOBALS = require 'globals'
     CLASSES = LUX.pack('classes')
+    test_image = CLASSES.Sprite('smol_slime')
+    test_image.load()
+    test_image.set_state('moving')
+    for k,v in pairs(GLOBALS) do
+        print(k,v)
+    end
+    print()
+    test_image.set_pos(GLOBALS.game_width/2, GLOBALS.game_height/2)
 end
 
 function love.update(dt)
@@ -32,13 +42,13 @@ function love.update(dt)
         framecount = framecount + 1
 
         -- Game logic here
-        
+        test_image:update()
     end
 end
 
 function love.draw()
-    love.graphics.scale(unit)
     -- Love2D Draw. Draws things.
+    test_image:render()
 end
 
 function love.keyreleased(key)
