@@ -52,8 +52,14 @@ function love.draw()
 end
 
 function love.keyreleased(key)
+    if key == 'left' or key == 'right' then
+        test_image.set_state('idle')
+    end
+    if key == 'up' or key == 'down' then
+        test_image.set_state('moving')
+    end
     -- Debug exit
-    if key == 'escape' then
+    if key == 'f8' then
         print("Frame count: ", framecount)
         print("Pseudo-time count: ", framecount/GLOBALS.framerate)
         love.event.quit()
