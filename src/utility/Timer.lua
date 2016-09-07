@@ -1,7 +1,7 @@
 
 
 return function(seconds, doing, doing_params, done, done_params)
-    --[[ Timer (float, function, function) ]]
+    --[[ Timer (float, function, table, function, table) ]]
     local obj = {}
 
     -- private

@@ -1,6 +1,3 @@
-[submodule "libs/luxproject"]
-	path = libs/luxproject
-	url = https://github.com/kazuo256/luxproject.git
 [submodule "src/libs/lux"]
 	path = src/libs/lux
 	url = https://github.com/kazuo256/luxproject.git
