@@ -1,13 +1,20 @@
 
 
-return function(quads, seconds, loop)
+-- dependencies
+local print = print
+local UTILITY = UTILITY
+local GLOBALS = GLOBALS
+
+-- class declaration
+local Animation = LUX.class:new{}
+
+function Animation:instance(_ENV, quads, seconds, loop)
   --[[ Animation (table, float, function) ]]
-  local obj = {}
 
   -- public
-  obj.step = seconds or 0.1
-  obj.loopable = loop or false
-  obj.current_frame = 1
+  step = seconds or 0.1
+  loopable = loop or false
+  current_frame = 1
   -- private
   local frames = quads
   local animation_length = #frames
@@ -18,39 +25,40 @@ return function(quads, seconds, loop)
   local function reset()
     fcount = 0
   end
+
   local function next()
-    if obj.loopable then
-      obj.current_frame = (obj.current_frame % animation_length) + 1
-      print("next frame:", obj.current_frame)
-    elseif obj.current_frame < animation_length then
+    if loopable then
+      current_frame = (current_frame % animation_length) + 1
+      print("next frame:", current_frame)
+    elseif current_frame < animation_length then
       print("next frame! no loop")
-      obj.current_frame = obj.current_frame + 1
+      current_frame = current_frame + 1
     else
-      obj.stop()
+      stop()
       finished = true
     end
   end
 
-  local frame_timer = UTILITY.Timer(obj.step, GLOBALS.null_function, nil, next, nil)
+  local frame_timer = UTILITY.Timer(step, GLOBALS.null_function, {}, next, {})
 
-  function obj.play()
+  function start()
     play = true
   end
 
-  function obj.stop()
+  function stop()
     play = false
     reset()
   end
 
-  function obj.pause()
+  function pause()
     play = false
   end
 
-  function obj:getFrame()
-    return frames[obj.current_frame]
+  function getFrame()
+    return frames[current_frame]
   end
 
-  function obj:update()
+  function update()
     if play then
       print("animating...")
       if not frame_timer.is_running() then
@@ -61,5 +69,6 @@ return function(quads, seconds, loop)
     end
   end
 
-  return obj
 end
+
+return Animation

@@ -1,43 +1,49 @@
 
+-- dependencies
+local GLOBALS = GLOBALS
+local unpack = unpack
 
-return function(seconds, doing, doing_params, done, done_params)
+-- class declaration
+local Timer = LUX.class:new{}
+
+function Timer:instance(_ENV, seconds, doing, doing_params, done, done_params)
   --[[ Timer (float, function, table, function, table) ]]
-  local obj = {}
 
   -- private
   local fcount = 0
   local frametime = seconds * GLOBALS.framerate
   local go = false
 
-  function obj:update()
+  function update()
     if go then
       fcount = fcount + 1
       if fcount < frametime then
-        doing(doing_params)
+        doing(unpack(doing_params))
       else
-        done(done_params)
-        obj.stop()
+        done(unpack(done_params))
+        stop()
         return true
       end
     end
   end
 
-  function obj.start()
+  function start()
     go = true
   end
 
-  function obj.pause()
+  function pause()
     go = false
   end
 
-  function obj.stop()
+  function stop()
     go = false
     fcount = 0
   end
 
-  function obj.is_running()
+  function is_running()
     return go
   end
 
-  return obj
 end
+
+return Timer
