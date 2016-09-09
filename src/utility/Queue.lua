@@ -2,7 +2,7 @@
 -- dependencies
 local assert = assert
 
-local Queue = LUX.class:new()
+local Queue = LUX.class:new{}
 
 function Queue:instance(_ENV, size)
   local queue = {}

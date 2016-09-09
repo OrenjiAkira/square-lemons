@@ -18,6 +18,7 @@ res.animations = {
     loop   = true,
   },
   {
+    default = true,
     name   = "moving",
     quads  = {
       love.graphics.newQuad(0*32, 0, 32, 48, res.img:getDimensions()),

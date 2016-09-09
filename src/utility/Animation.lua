@@ -1,5 +1,4 @@
 
-
 -- dependencies
 local print = print
 local UTILITY = UTILITY
@@ -60,7 +59,7 @@ function Animation:instance(_ENV, quads, seconds, loop)
 
   function update()
     if play then
-      print("animating...")
+      print("animation playing...")
       if not frame_timer.is_running() then
         frame_timer.start()
       elseif frame_timer:update() then

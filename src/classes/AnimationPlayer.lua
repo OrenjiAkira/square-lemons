@@ -1,58 +1,56 @@
 
+-- dependencies
+local assert = assert
+local print = print
+local love = love
+local UTILITY = UTILITY
 
-return function(resource_animations)
+local AnimationPlayer = LUX.class:new{}
+
+function AnimationPlayer:instance(_ENV, resource_animations)
   --[[ AnimationPlayer (table) ]]
-  local obj = {}
 
   -- private
-  local current_animation
-  local current_animation_name
   local animations = {}
-  local empty = {
-    name   = "__unset",
-    quads  = { love.graphics.newQuad(0, 0, 0, 0, 0, 0) },
-    step   = false,
-    loop   = false,
-  }
-
-  local function load_animation(animation_info)
-    animations[animation_info.name] = UTILITY.Animation(animation_info.quads, animation_info.step, animation_info.loop)
+  local current_animation_name = resource_animations[1].name
+  for i=1,#resource_animations do
+    print("default", resource_animations[i].default)
+    animations[resource_animations[i].name] = UTILITY.Animation(resource_animations[i].quads, resource_animations[i].step, resource_animations[i].loop)
+    if resource_animations[i].default then
+      current_animation_name = resource_animations[i].name
+    end
   end
 
-  function obj.play(aname)
+  local function current_animation()
+    return animations[current_animation_name]
+  end
+
+  function play(aname)
     if aname then
       assert(animations[aname], "Invalid animation name: " .. aname)
       current_animation_name = aname
-      current_animation = animations[aname]
     end
-    current_animation.play()
+    current_animation().start()
   end
 
-  function obj.stop()
-    current_animation.stop()
+  function stop()
+    current_animation().stop()
   end
 
-  function obj.pause()
-    current_animation.pause()
+  function pause()
+    current_animation().pause()
   end
 
-  function obj.load()
-    for i=1,#resource_animations do
-      load_animation(resource_animations[i])
-    end
-    load_animation(empty)
-    current_animation = animations["__unset"]
-  end
 
-  function obj:update()
-    current_animation:update()
-  end
-
-  function obj.get_quad()
+  function update()
     print(current_animation_name)
-    print(current_animation:getFrame())
-    return current_animation:getFrame()
+    current_animation().update()
   end
 
-  return obj
+  function get_quad()
+    return current_animation().getFrame()
+  end
+
 end
+
+return AnimationPlayer
