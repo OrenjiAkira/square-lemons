@@ -3,8 +3,9 @@
 local print = print
 local UTILITY = UTILITY
 local CLASSES = CLASSES
+local GLOBALS = GLOBALS
 
-
+-- class declaration
 local Body = LUX.class:new{}
 
 Body:inherit(CLASSES.Object2D)
@@ -15,16 +16,20 @@ function Body:instance(_ENV, x, y)
   -- private
   local speed = UTILITY.Vector:new{}
   local speedlimitter = 0.8
-
-  -- initialisation
-  speed:set(3,0)
+  local acc = 1*GLOBALS.frameunit
 
   local function check_speedlimit()
-    if speed*speed > EPSILON then
+    if speed*speed > EPSILON*EPSILON then
       speed:scale(speedlimitter)
     else
       speed:set(0)
     end
+  end
+
+  function move(dir)
+    local direction = UTILITY.Direction[dir]
+    direction:scale(acc)
+    speed:add(direction)
   end
 
   function update()

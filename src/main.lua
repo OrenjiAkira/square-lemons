@@ -36,6 +36,26 @@ function love.load()
   test_room = CLASSES.Room('room_basic')
 end
 
+local function handleinput()
+  local up, right, down, left = 'up', 'right', 'down', 'left'
+  local key = love.keyboard
+  if key.isDown(up) then
+    test_image.set_state('moving')
+    test_body.move('UP')
+  elseif key.isDown(right) then
+    test_image.set_state('moving')
+    test_body.move('RIGHT')
+  elseif key.isDown(down) then
+    test_image.set_state('moving')
+    test_body.move('DOWN')
+  elseif key.isDown(left) then
+    test_image.set_state('moving')
+    test_body.move('LEFT')
+  else
+    test_image.set_state('idle')
+  end
+end
+
 function love.update(dt)
   -- Love2D Update. Updates game logic.
   framedelay = framedelay + dt
@@ -44,6 +64,7 @@ function love.update(dt)
     framecount = framecount + 1
 
     -- Game logic here
+    handleinput()
     test_body.update()
     test_image.pos:set(test_body.pos:unpack())
     test_image.update()
@@ -57,12 +78,6 @@ function love.draw()
 end
 
 function love.keyreleased(key)
-  if key == 'left' or key == 'right' then
-    test_image.set_state('idle')
-  end
-  if key == 'up' or key == 'down' then
-    test_image.set_state('moving')
-  end
   -- Debug exit
   if key == 'f8' then
     print("Frame count: ", framecount)
