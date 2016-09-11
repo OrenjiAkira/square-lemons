@@ -14,6 +14,7 @@ local framecount = 0
 
 local test_image
 local test_room
+local test_body
 
 function love.load()
   -- Love2D Load. Load stuff here.
@@ -28,9 +29,9 @@ function love.load()
   RESOURCES = LUX.pack('resources')
   CLASSES = LUX.pack('classes')
 
-
+  test_body = CLASSES.Body()
   test_image = CLASSES.Sprite('smol_slime')
-  test_image.set_pos(GLOBALS.game_width/2, GLOBALS.game_height/2)
+  test_body.pos:set(GLOBALS.game_width/4, GLOBALS.game_height/2)
 
   test_room = CLASSES.Room('room_basic')
 end
@@ -43,6 +44,8 @@ function love.update(dt)
     framecount = framecount + 1
 
     -- Game logic here
+    test_body.update()
+    test_image.pos:set(test_body.pos:unpack())
     test_image.update()
   end
 end
