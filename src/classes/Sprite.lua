@@ -1,6 +1,6 @@
 
 local love = love
-local RESOURCES = LUX.pack('resources')
+local RESOURCES = RESOURCES
 local CLASSES = CLASSES
 local UTILITY = UTILITY
 local GLOBALS = GLOBALS

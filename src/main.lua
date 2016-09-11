@@ -13,6 +13,7 @@ local framedelay = 0
 local framecount = 0
 
 local test_image
+local test_room
 
 function love.load()
   -- Love2D Load. Load stuff here.
@@ -24,9 +25,14 @@ function love.load()
 
   -- Game Globals and Types
   GLOBALS = require 'globals'
+  RESOURCES = LUX.pack('resources')
   CLASSES = LUX.pack('classes')
+
+
   test_image = CLASSES.Sprite('smol_slime')
   test_image.set_pos(GLOBALS.game_width/2, GLOBALS.game_height/2)
+
+  test_room = CLASSES.Room('room_basic')
 end
 
 function love.update(dt)
@@ -43,7 +49,8 @@ end
 
 function love.draw()
   -- Love2D Draw. Draws things.
-  test_image:render()
+  test_room.render()
+  test_image.render()
 end
 
 function love.keyreleased(key)
