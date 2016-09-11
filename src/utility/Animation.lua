@@ -57,6 +57,7 @@ function Animation:instance(_ENV, quads, seconds, loop)
     return frames[current_frame]
   end
 
+  -- update
   function update()
     if play then
       print("animation playing...")

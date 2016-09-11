@@ -14,19 +14,6 @@ function Timer:instance(_ENV, seconds, doing, doing_params, done, done_params)
   local frametime = seconds * GLOBALS.framerate
   local go = false
 
-  function update()
-    if go then
-      fcount = fcount + 1
-      if fcount < frametime then
-        doing(unpack(doing_params))
-      else
-        done(unpack(done_params))
-        stop()
-        return true
-      end
-    end
-  end
-
   function start()
     go = true
   end
@@ -42,6 +29,20 @@ function Timer:instance(_ENV, seconds, doing, doing_params, done, done_params)
 
   function is_running()
     return go
+  end
+
+  -- update
+  function update()
+    if go then
+      fcount = fcount + 1
+      if fcount < frametime then
+        doing(unpack(doing_params))
+      else
+        done(unpack(done_params))
+        stop()
+        return true
+      end
+    end
   end
 
 end

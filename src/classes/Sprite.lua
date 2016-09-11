@@ -1,20 +1,25 @@
 
+-- dependencies
 local love = love
 local RESOURCES = RESOURCES
 local CLASSES = CLASSES
 local UTILITY = UTILITY
 local GLOBALS = GLOBALS
 
+-- class declaration
 local Sprite = LUX.class:new{}
 
 function Sprite:instance(_ENV, res_name)
   --[[ Sprite (string) ]]
 
+  -- private
   local resource = RESOURCES[res_name]
   local pos = UTILITY.Vector:new{}
   local animation_player = CLASSES.AnimationPlayer(resource.animations)
   local image = resource.img
   local quad = animation_player.get_quad()
+
+  -- initialisation
   animation_player.play()
 
   function set_pos(x, y)
@@ -25,11 +30,13 @@ function Sprite:instance(_ENV, res_name)
     animation_player.play(state)
   end
 
+  -- update
   function update()
     animation_player.update()
     quad = animation_player.get_quad()
   end
 
+  -- draw
   function render()
     love.graphics.push()
     love.graphics.scale(GLOBALS.unit)

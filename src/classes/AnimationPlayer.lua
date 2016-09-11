@@ -40,15 +40,15 @@ function AnimationPlayer:instance(_ENV, resource_animations)
   function pause()
     current_animation().pause()
   end
+  
+  function get_quad()
+    return current_animation().getFrame()
+  end
 
-
+  -- update
   function update()
     print(current_animation_name)
     current_animation().update()
-  end
-
-  function get_quad()
-    return current_animation().getFrame()
   end
 
 end

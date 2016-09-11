@@ -1,17 +1,24 @@
 
+-- dependencies
 local table = table
 local love = love
 local RESOURCES = RESOURCES
 local GLOBALS = GLOBALS
 
+-- class declaration
 local Room = LUX.class:new{}
 
 function Room:instance(_ENV, res_name)
+  --[[ Room (string) ]]
+
+  -- private
   local resource = RESOURCES[res_name]
   local spritebatch = love.graphics.newSpriteBatch(resource.img, 1024, 'static')
   local tiles = resource.tiles
   local width, height = #tiles, #tiles[1]
   local tiledata = resource.tiledata
+
+  -- initialisation
   for i=1, width do
     local row = tiles[i]
     for j=1, height do
@@ -22,6 +29,7 @@ function Room:instance(_ENV, res_name)
     end
   end
 
+  -- draw
   function render()
     love.graphics.push()
     love.graphics.scale(GLOBALS.unit)
