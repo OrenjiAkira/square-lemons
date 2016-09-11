@@ -13,7 +13,7 @@ function Object2D:instance(_ENV, x, y)
   --[[ Object2D (table) ]]
 
   -- public
-  EPSILON = 1e-5 -- const, do not change
+  EPSILON = 1e-2 -- const, do not change
   pos = UTILITY.Vector:new{ x or 0, y or 0 }
 
 end

@@ -20,12 +20,6 @@ res.tiles = {
   { 4, 23, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 24, 4 },
   { 4,  4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,  4, 4 },
 }
-res.tiledata = {}
-for i=1, res.width/GLOBALS.unit do
-  for j=1, res.height/GLOBALS.unit do
-    local qx, qy, qw, qh = (j-1) * GLOBALS.unit, (i-1) * GLOBALS.unit, GLOBALS.unit, GLOBALS.unit
-    table.insert(res.tiledata, love.graphics.newQuad(qx, qy, qw, qh, res.width, res.height))
-  end
-end
+res.tiledata = UTILITY.Tiledata(res.width, res.height)
 
 return res

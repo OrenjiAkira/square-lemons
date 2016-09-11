@@ -24,7 +24,7 @@ function Room:instance(_ENV, res_name)
     for j=1, height do
       local tile = tiles[i][j]
       if tile ~= 0 then
-        spritebatch:add(tiledata[tile], j-1, i-1, 0, 1/GLOBALS.unit, 1/GLOBALS.unit)
+        spritebatch:add(tiledata.get_data(tile), j-1, i-1, 0, 1/GLOBALS.unit, 1/GLOBALS.unit)
       end
     end
   end
