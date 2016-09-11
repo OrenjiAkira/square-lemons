@@ -9,22 +9,19 @@ local GLOBALS = GLOBALS
 -- class declaration
 local Sprite = LUX.class:new{}
 
+Sprite:inherit(CLASSES.Object2D)
 function Sprite:instance(_ENV, res_name)
+  self:super(_ENV)
   --[[ Sprite (string) ]]
 
   -- private
   local resource = RESOURCES[res_name]
-  local pos = UTILITY.Vector:new{}
   local animation_player = CLASSES.AnimationPlayer(resource.animations)
   local image = resource.img
   local quad = animation_player.get_quad()
 
   -- initialisation
   animation_player.play()
-
-  function set_pos(x, y)
-    pos:set(x, y)
-  end
 
   function set_state(state)
     animation_player.play(state)
