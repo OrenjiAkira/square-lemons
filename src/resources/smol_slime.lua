@@ -2,8 +2,7 @@
 local res = {}
 
 res.img = love.graphics.newImage 'assets/smol-slime.png'
-res.width = res.img:getWidth()
-res.height = res.img:getHeight()
+res.width, res.height = res.img:getDimensions()
 res.offset = UTILITY.Vector:new{16, 32}
 res.animations = {
   {
