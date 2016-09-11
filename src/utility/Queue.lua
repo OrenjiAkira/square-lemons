@@ -5,6 +5,8 @@ local assert = assert
 local Queue = LUX.class:new{}
 
 function Queue:instance(_ENV, size)
+  --[[ Queue (int) ]]
+
   local queue = {}
   local head, tail = 0, 0
   local length = size or 256
